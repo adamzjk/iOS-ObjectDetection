@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "papers.co-ae27-os-x-yosemite-mac-apple-36-3840x2400-4k-wallpaper-2.jpg",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "papers.co-ae27-os-x-yosemite-mac-apple-36-3840x2400-4k-wallpaper.jpg",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "papers.co-ae27-os-x-yosemite-mac-apple-36-3840x2400-4k-wallpaper-1.jpg",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

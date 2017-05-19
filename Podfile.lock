@@ -1,0 +1,15 @@
+PODS:
+  - BlueSocket (0.12.35)
+  - SwiftSocket (2.0.1)
+
+DEPENDENCIES:
+  - BlueSocket
+  - SwiftSocket
+
+SPEC CHECKSUMS:
+  BlueSocket: 4cdbbcd62b2b02897817b689477f4d4f3fa54944
+  SwiftSocket: 2d814afdc97c89217982f86fd036c1874134a63f
+
+PODFILE CHECKSUM: 17f4a5a54410acfedc9ff5f5f7d27cd80ed61f67
+
+COCOAPODS: 1.2.1

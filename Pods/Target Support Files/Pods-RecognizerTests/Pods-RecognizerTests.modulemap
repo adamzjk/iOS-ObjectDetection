@@ -1,0 +1,6 @@
+framework module Pods_RecognizerTests {
+  umbrella header "Pods-RecognizerTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
