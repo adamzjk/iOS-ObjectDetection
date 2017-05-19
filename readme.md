@@ -15,6 +15,8 @@
 
 ## Features
 
+​	You can take a photo or select photo from Photo Library, then check or save(by taping save button) the result image.
+
 ​	Real-time object detection is not supported due to the limitation of the computational ability on mobile device(you can't do a lot of matrix computation in a small amount of time on a mobile CPU) and network bandwidth(send image to server might take a while).
 
 ## Server
