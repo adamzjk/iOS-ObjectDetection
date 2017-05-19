@@ -4,7 +4,10 @@
 
 ## Demo
 
-[[http://wx3.sinaimg.cn/large/98d135cfly1ffql9xdjaqj21kw0xrnpj.jpg]]
+```
+![Image of demo]
+(http://wx3.sinaimg.cn/large/98d135cfly1ffql9xdjaqj21kw0xrnpj.jpg)
+```
 
 ## Requirements 
 
