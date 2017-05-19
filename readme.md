@@ -1,6 +1,6 @@
 # iOS Object Detection App
 
-​	This is a client app which means you are going to **need a server ** in order to run the application. A server with a powerful GPU and high network bandwidth is recommanded. 
+​	This is a client app which means you are going to **need a server** in order to run the application. A server with a powerful GPU and high network bandwidth is recommanded. 
 
 ## Demo
 
@@ -15,11 +15,11 @@
 
 ## Features
 
-​	Real-time object detection is not supported due to the limitation of mobile CPU(which means you can't do complicate computation on device) and network bandwidth(send image to server might take a while).
+​	Real-time object detection is not supported due to the limitation of the computational ability on mobile device(you can't do a lot of matrix computation in a small amount of time on a mobile CPU) and network bandwidth(send image to server might take a while).
 
 ## Server
 
-​	Server should be able to listen imcomming TCP connections on both port 23333 and 23334, port 23334 is used to ensure the client that server is running and alive, port 23333 is used to receive/send images. Server example:
+​	Server should listen imcomming TCP connections on both port 23333 and 23334(Optional), port 23333 is used to receive/send images. Server example:
 
 ```python
 def run(self):
