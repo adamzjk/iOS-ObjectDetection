@@ -22,7 +22,6 @@ func connectAndSentImage(image:UIImage, ip:String!) -> UIImage?{
         try tcpSocket.write(from: imageData!)
         print("sent")
 
-        
         // 3, retrive image
         var img_buffer = Data(capacity: 1024*1024)
         var img_total = Data(capacity: 4*1024*1024)
@@ -37,7 +36,6 @@ func connectAndSentImage(image:UIImage, ip:String!) -> UIImage?{
                 break
             }
         }while true
-
         
         // 3, Set photoImageView to display the selected image.
         print("img_total = ", img_total.count)
@@ -69,6 +67,7 @@ class RecogViewController: UIViewController, UITextFieldDelegate,
 UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     //MARK: Properties
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var ratingControl: RatingControl!
 
     
     override func viewDidLoad() {

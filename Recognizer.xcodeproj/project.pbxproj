@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		38EDD2DC3B290B2356882418 /* Pods_RecognizerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC0B3C8B6AF996EC573686B /* Pods_RecognizerTests.framework */; };
+		66D59D911ED1D6200017CA98 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D59D901ED1D6200017CA98 /* RatingControl.swift */; };
 		66E90B161ECD5FED00D4CF06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E90B151ECD5FED00D4CF06 /* AppDelegate.swift */; };
 		66E90B181ECD5FED00D4CF06 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E90B171ECD5FED00D4CF06 /* AddViewController.swift */; };
 		66E90B1B1ECD5FED00D4CF06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66E90B191ECD5FED00D4CF06 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		077C0D6B48CFF56916C1A936 /* Pods-RecognizerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecognizerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecognizerTests/Pods-RecognizerTests.release.xcconfig"; sourceTree = "<group>"; };
+		66D59D901ED1D6200017CA98 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		66E90B121ECD5FED00D4CF06 /* Recognizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recognizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66E90B151ECD5FED00D4CF06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66E90B171ECD5FED00D4CF06 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				66E90B171ECD5FED00D4CF06 /* AddViewController.swift */,
 				66E90B351ECD6E7400D4CF06 /* RecogViewController.swift */,
 				66E90B191ECD5FED00D4CF06 /* Main.storyboard */,
+				66D59D901ED1D6200017CA98 /* RatingControl.swift */,
 				66E90B1C1ECD5FED00D4CF06 /* Assets.xcassets */,
 				66E90B1E1ECD5FED00D4CF06 /* LaunchScreen.storyboard */,
 				66E90B211ECD5FED00D4CF06 /* Info.plist */,
@@ -334,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66D59D911ED1D6200017CA98 /* RatingControl.swift in Sources */,
 				66E90B181ECD5FED00D4CF06 /* AddViewController.swift in Sources */,
 				66E90B361ECD6E7400D4CF06 /* RecogViewController.swift in Sources */,
 				66E90B161ECD5FED00D4CF06 /* AppDelegate.swift in Sources */,

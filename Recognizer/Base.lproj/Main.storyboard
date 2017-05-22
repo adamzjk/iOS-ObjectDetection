@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cLQ-4p-Ygc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cLQ-4p-Ygc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -116,16 +116,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="59A-lh-Qmu">
-                                <rect key="frame" x="16" y="602" width="343" height="42.5"/>
+                                <rect key="frame" x="16" y="629" width="343" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By AdamZJK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNH-ca-OFH">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30.5"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recognizer v2.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNH-ca-OFH">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="18"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="adamzjk@foxmail.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veq-oQ-Sfn">
-                                        <rect key="frame" x="0.0" y="30.5" width="343" height="12"/>
+                                        <rect key="frame" x="0.0" y="18" width="343" height="12"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -133,29 +133,42 @@
                                 </subviews>
                             </stackView>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="Rqe-Hs-Ay8">
-                                <rect key="frame" x="16" y="114" width="343" height="480"/>
+                                <rect key="frame" x="16" y="72" width="343" height="460"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="480" id="1dQ-dX-BYe"/>
-                                    <constraint firstAttribute="width" constant="343" id="o7c-SK-kmr"/>
+                                    <constraint firstAttribute="width" constant="343" id="DdS-CD-twD"/>
+                                    <constraint firstAttribute="height" constant="460" id="KTl-LN-Nm9"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="pZc-MB-MbX" appends="YES" id="Zju-aF-Wvb"/>
                                 </connections>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vuU-gL-bc5">
+                                <rect key="frame" x="166" y="583" width="43" height="30"/>
+                                <state key="normal" title="Voice"/>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ymc-xW-ToV" customClass="RatingControl" customModule="Recognizer" customModuleProvider="target">
+                                <rect key="frame" x="58" y="537" width="259" height="44"/>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Rqe-Hs-Ay8" firstAttribute="top" secondItem="sRK-Fq-MNM" secondAttribute="bottom" constant="50" id="Pvb-9T-a6B"/>
-                            <constraint firstItem="59A-lh-Qmu" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" id="TDP-ae-hGT"/>
-                            <constraint firstItem="Rqe-Hs-Ay8" firstAttribute="trailing" secondItem="Wq3-8b-Xg3" secondAttribute="trailingMargin" id="fvi-QU-tcy"/>
-                            <constraint firstItem="GVh-jE-f7x" firstAttribute="top" secondItem="59A-lh-Qmu" secondAttribute="bottom" constant="22" id="oZ0-02-2nK"/>
-                            <constraint firstItem="Rqe-Hs-Ay8" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" id="vWc-zW-4Ca"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="59A-lh-Qmu" secondAttribute="trailing" id="xls-gW-hEH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="59A-lh-Qmu" secondAttribute="trailing" id="5ui-oN-lyf"/>
+                            <constraint firstItem="59A-lh-Qmu" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" id="6ha-qe-hvu"/>
+                            <constraint firstItem="Ymc-xW-ToV" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" constant="42" id="8w6-o8-wSY"/>
+                            <constraint firstItem="vuU-gL-bc5" firstAttribute="top" secondItem="Ymc-xW-ToV" secondAttribute="bottom" constant="2" id="CwS-hO-TQI"/>
+                            <constraint firstItem="59A-lh-Qmu" firstAttribute="top" secondItem="vuU-gL-bc5" secondAttribute="bottom" constant="16" id="Erf-BF-xx2"/>
+                            <constraint firstItem="GVh-jE-f7x" firstAttribute="top" secondItem="59A-lh-Qmu" secondAttribute="bottom" constant="8" id="EvN-gR-6rH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ymc-xW-ToV" secondAttribute="trailing" constant="42" id="Jrb-oa-KLz"/>
+                            <constraint firstItem="Rqe-Hs-Ay8" firstAttribute="top" secondItem="sRK-Fq-MNM" secondAttribute="bottom" constant="8" id="Tzg-n4-2Lv"/>
+                            <constraint firstItem="Rqe-Hs-Ay8" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" id="d7x-n1-xIl"/>
+                            <constraint firstItem="Rqe-Hs-Ay8" firstAttribute="trailing" secondItem="Wq3-8b-Xg3" secondAttribute="trailingMargin" id="ukv-jW-uUS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vuU-gL-bc5" secondAttribute="trailing" constant="150" id="weu-ea-VST"/>
+                            <constraint firstItem="vuU-gL-bc5" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" constant="150" id="wf7-gG-RqP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tap to select" id="Exj-bh-CT2">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Cda-dY-Hon"/>
+                        <barButtonItem key="leftBarButtonItem" title="Feedback" id="Cda-dY-Hon"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="bIX-KC-lp4">
                             <connections>
                                 <action selector="saveButtonPressed:" destination="k0Z-KQ-Gj2" id="6fk-wh-UgE"/>
@@ -164,6 +177,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="photoImageView" destination="Rqe-Hs-Ay8" id="GcD-IQ-scV"/>
+                        <outlet property="ratingControl" destination="Ymc-xW-ToV" id="9J7-YM-tCE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCQ-7d-C9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
