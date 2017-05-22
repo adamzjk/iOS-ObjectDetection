@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 @IBDesignable class RatingControl: UIStackView {
     
@@ -22,6 +23,7 @@ import UIKit
         }
     }
     private var ratingButtons = [UIButton]()
+    
     var rating = 0 {
         didSet {
             updateButtonSelectionStates()
@@ -41,6 +43,41 @@ import UIKit
     }
     
     //MARK: Private Methods
+    let generalPositiveWords:[String] = ["not bad", "good", "nice", "better", "accurate",]
+    let veryPositiveWords:[String] = ["impressive", "supris", "great"]
+    let negativeWords:[String] = ["bad", "not good"]
+    
+    func sentimentAnalysisAndAdjustScore(text: String) {
+        let text = text.lowercased()
+        var score:Int = 3
+        // bad
+        if text.range(of: "not bad") != nil{
+            score += 1
+        } else if text.range(of: "bad") != nil{
+            score -= 2
+        }
+        // good
+        if text.range(of: "good") != nil{
+            score += 1
+        } else if text.range(of: "not good") != nil{
+            score -= 1
+        }
+        if text.range(of: "nice") != nil {score += 1}
+        if text.range(of: "accurate") != nil {score += 1}
+        if text.range(of: "impressive") != nil {score += 2}
+        if text.range(of: "great") != nil {score += 2}
+        
+        if text.range(of: "awful") != nil {score -= 2}
+        if text.range(of: "awful") != nil {score -= 2}
+        if text.range(of: "acceptable") != nil {score = 3}
+        
+        if score > 5 { score = 5 }
+        if score < 0 { score = 0 }
+        
+        print(text)
+        self.rating = score
+    }
+    
     private func setupButtons() {
         
         // Clear any existing buttons
@@ -55,7 +92,7 @@ import UIKit
         let filledStar = UIImage(named: "filledStar", in: bundle, compatibleWith: self.traitCollection)
         let emptyStar = UIImage(named:"emptyStar", in: bundle, compatibleWith: self.traitCollection)
         
-        for index in 0..<starCount {
+        for _ in 0..<starCount {
             // Create the button
             let button = UIButton()
             

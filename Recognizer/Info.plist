@@ -23,9 +23,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Use to perform real time object detection</string>
+	<string>If you want to use this app to sacn images based on camera, you must grant us the authorization to use the camera. </string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Need photos to detect object</string>
+	<string>Photo Library is required for object recognition. We won&apos;t leak your privacy for neither commercial nor personal usage.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -47,5 +47,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Speech Recognition is required for feedback.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Speech Recognition is required for feedback.</string>
 </dict>
 </plist>

@@ -23,24 +23,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mfY-fH-bvu">
-                                <rect key="frame" x="16" y="604" width="343" height="42.5"/>
+                                <rect key="frame" x="16" y="588" width="343" height="42.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recognizer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prH-NT-Ryx">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="30.5"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6s-Xu-8Zl">
                                         <rect key="frame" x="0.0" y="30.5" width="343" height="12"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EHl-NK-cmR">
-                                <rect key="frame" x="16" y="308" width="343" height="99.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EHl-NK-cmR">
+                                <rect key="frame" x="16" y="308" width="343" height="83.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOu-ir-aF8">
                                         <rect key="frame" x="114.5" y="0.0" width="114.5" height="23.5"/>
@@ -49,14 +49,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="10.8.203.74" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1uL-of-ySb">
-                                        <rect key="frame" x="80" y="31.5" width="183" height="30"/>
+                                        <rect key="frame" x="80" y="23.5" width="183" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11z-p1-iLw">
-                                        <rect key="frame" x="143" y="69.5" width="57" height="30"/>
-                                        <state key="normal" title="Register"/>
+                                        <rect key="frame" x="144" y="53.5" width="55" height="30"/>
+                                        <state key="normal" title="Confirm"/>
                                         <connections>
                                             <action selector="continueAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="do3-Bo-qLC"/>
                                         </connections>
@@ -143,16 +143,20 @@
                                     <outletCollection property="gestureRecognizers" destination="pZc-MB-MbX" appends="YES" id="Zju-aF-Wvb"/>
                                 </connections>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vuU-gL-bc5">
-                                <rect key="frame" x="166" y="583" width="43" height="30"/>
-                                <state key="normal" title="Voice"/>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ymc-xW-ToV" customClass="RatingControl" customModule="Recognizer" customModuleProvider="target">
                                 <rect key="frame" x="58" y="537" width="259" height="44"/>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vuU-gL-bc5">
+                                <rect key="frame" x="133" y="583" width="109" height="30"/>
+                                <state key="normal" title="Start Recording"/>
+                                <connections>
+                                    <action selector="voiceButtonPressed:" destination="k0Z-KQ-Gj2" eventType="touchUpInside" id="Zuq-L8-9zz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vuU-gL-bc5" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" constant="117" id="17h-1T-p8T"/>
                             <constraint firstAttribute="trailingMargin" secondItem="59A-lh-Qmu" secondAttribute="trailing" id="5ui-oN-lyf"/>
                             <constraint firstItem="59A-lh-Qmu" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" id="6ha-qe-hvu"/>
                             <constraint firstItem="Ymc-xW-ToV" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" constant="42" id="8w6-o8-wSY"/>
@@ -162,13 +166,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Ymc-xW-ToV" secondAttribute="trailing" constant="42" id="Jrb-oa-KLz"/>
                             <constraint firstItem="Rqe-Hs-Ay8" firstAttribute="top" secondItem="sRK-Fq-MNM" secondAttribute="bottom" constant="8" id="Tzg-n4-2Lv"/>
                             <constraint firstItem="Rqe-Hs-Ay8" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" id="d7x-n1-xIl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vuU-gL-bc5" secondAttribute="trailing" constant="117" id="mE0-Jv-u9K"/>
                             <constraint firstItem="Rqe-Hs-Ay8" firstAttribute="trailing" secondItem="Wq3-8b-Xg3" secondAttribute="trailingMargin" id="ukv-jW-uUS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="vuU-gL-bc5" secondAttribute="trailing" constant="150" id="weu-ea-VST"/>
-                            <constraint firstItem="vuU-gL-bc5" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" constant="150" id="wf7-gG-RqP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tap to select" id="Exj-bh-CT2">
-                        <barButtonItem key="leftBarButtonItem" title="Feedback" id="Cda-dY-Hon"/>
+                        <barButtonItem key="leftBarButtonItem" title="Feedback" id="Cda-dY-Hon">
+                            <connections>
+                                <action selector="feedbackButtonPressed:" destination="k0Z-KQ-Gj2" id="YTm-4a-hBo"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="bIX-KC-lp4">
                             <connections>
                                 <action selector="saveButtonPressed:" destination="k0Z-KQ-Gj2" id="6fk-wh-UgE"/>
@@ -178,6 +185,7 @@
                     <connections>
                         <outlet property="photoImageView" destination="Rqe-Hs-Ay8" id="GcD-IQ-scV"/>
                         <outlet property="ratingControl" destination="Ymc-xW-ToV" id="9J7-YM-tCE"/>
+                        <outlet property="voiceButton" destination="vuU-gL-bc5" id="VjP-Yn-JkJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCQ-7d-C9K" userLabel="First Responder" sceneMemberID="firstResponder"/>

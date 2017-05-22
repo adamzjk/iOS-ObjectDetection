@@ -10,6 +10,7 @@ import UIKit
 import Socket
 import MobileCoreServices
 import SwiftSocket
+import Speech
 
 func connectAndSentImage(image:UIImage, ip:String!) -> UIImage?{
     let imageData = UIImageJPEGRepresentation(image, 0.3)
@@ -26,6 +27,7 @@ func connectAndSentImage(image:UIImage, ip:String!) -> UIImage?{
         var img_buffer = Data(capacity: 1024*1024)
         var img_total = Data(capacity: 4*1024*1024)
         try tcpSocket.setReadTimeout(value: 1000)
+        tcpSocket.readBufferSize = 1024*1024
         repeat{
             let byte_read = try tcpSocket.read(into: &img_buffer)
             if byte_read != 0 {
@@ -45,6 +47,16 @@ func connectAndSentImage(image:UIImage, ip:String!) -> UIImage?{
         return nil
     }
     return newImg
+}
+
+func sendFeedbackByUDP(score:Int!, ip:String!){
+    do {
+        let udpSocket = try Socket.create(family: .inet, type: .datagram, proto: .udp)
+        let serverAddr = Socket.createAddress(for: ip, on: 23335)
+        try udpSocket.write(from: String(score), to: serverAddr!)
+    } catch {
+        print(error)
+    }
 }
 
 class AlertController: UIViewController {
@@ -68,10 +80,18 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     //MARK: Properties
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
-
+    @IBOutlet weak var voiceButton: UIButton!
+    
+    // Speech Recognizer
+    var speechRecognitionResults = String()
+    private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
+    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var recognitionTask: SFSpeechRecognitionTask?
+    private let audioEngine = AVAudioEngine()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        speechRecognizer?.delegate = self as? SFSpeechRecognizerDelegate
 
         // Do any additional setup after loading the view.
     }
@@ -110,6 +130,73 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
         dismiss(animated: true, completion: nil)
     }
     
+    //Speech Recognition
+    func startRecording() {
+        if recognitionTask != nil {
+            recognitionTask?.cancel()
+            recognitionTask = nil
+        }
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryRecord)
+            try audioSession.setMode(AVAudioSessionModeMeasurement)
+            try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        } catch {
+            print("audioSession properties weren't set because of an error.")
+        }
+        
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        
+        guard let inputNode = audioEngine.inputNode else {
+            fatalError("Audio engine has no input node")
+        }
+        
+        guard let recognitionRequest = recognitionRequest else {
+            fatalError("Unable to create an SFSpeechAudioBufferRecognitionRequest object")
+        }
+        
+        recognitionRequest.shouldReportPartialResults = true
+        
+        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
+            
+            var isFinal = false
+            
+            if result != nil {
+                
+                self.speechRecognitionResults = (result?.bestTranscription.formattedString)!
+                isFinal = (result?.isFinal)!
+            }
+            
+            if error != nil || isFinal {
+                self.audioEngine.stop()
+                inputNode.removeTap(onBus: 0)
+                
+                self.recognitionRequest = nil
+                self.recognitionTask = nil
+                
+                self.voiceButton.isEnabled = true
+            }
+        })
+        
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
+            self.recognitionRequest?.append(buffer)
+        }
+        
+        audioEngine.prepare()
+        
+        do {
+            try audioEngine.start()
+        } catch {
+            print("audioEngine couldn't start because of an error.")
+        }
+    }
+    
+    func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
+        self.voiceButton.isEnabled = available
+    }
+    
     
     //MARK: Actions
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
@@ -121,9 +208,39 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
                                       style: UIAlertActionStyle.default,
                                       handler: nil))
         self.present(alert, animated: true, completion: nil)
-        
     }
     
+    @IBAction func feedbackButtonPressed(_ sender: UIBarButtonItem) {
+        let score = ratingControl.rating
+        sendFeedbackByUDP(score: score, ip: serverIpAddr)
+        let alert = UIAlertController(title: "Thanks",
+                                      message: "Our object detection model wil be improved with the help of your feedback",
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK",
+                                      style: UIAlertActionStyle.default,
+                                      handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func voiceButtonPressed(_ sender: UIButton) {
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            recognitionRequest?.endAudio()
+            self.voiceButton.isEnabled = false
+            let alert = UIAlertController(title: "Message",
+                                          message: self.speechRecognitionResults,
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "nice!",
+                                          style: UIAlertActionStyle.default,
+                                          handler: nil))
+            ratingControl.sentimentAnalysisAndAdjustScore(text: self.speechRecognitionResults)
+            self.present(alert, animated: true, completion: nil)
+            self.voiceButton.setTitle("Start Recording", for: .normal)
+        } else {
+            startRecording()
+            self.voiceButton.setTitle("Stop Recording", for: .normal)
+        }
+    }
     
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         
@@ -151,5 +268,4 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
         optionMenu.addAction(cancelAction)
         self.present(optionMenu, animated: true, completion: nil)
     }
-
 }
