@@ -18,7 +18,8 @@
 ## Features
 
 - iOS -> Select/Take Image -> Compress Image -> Send to server -> Receive Image -> Display -> (Optional) Feedback to server
-- Voice feedback and a very naive sentimental anaysis to convert text into rating.
+- Voice recognition
+- A very naive sentimental anaysis for rating(feedback).
 - ​Real-time object detection is **not** supported due to the limitation of the network bandwidth(sending image to server, though compressed, is still time consuming).
 
 ## Server
