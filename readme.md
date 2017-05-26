@@ -4,6 +4,8 @@
 
 ## Demo
 
+ Video demo: https://youtu.be/dkbxNVs7S9M ; screen shot below is **not** the newest!
+
 ![alt text](http://wx3.sinaimg.cn/large/98d135cfly1ffql9xdjaqj21kw0xrnpj.jpg)
 
 ## Requirements 
@@ -15,9 +17,9 @@
 
 ## Features
 
-​	You can take a photo or select photo from Photo Library, then check or save(by taping save button) the result image.
-
-​	Real-time object detection is not supported due to the limitation of the computational ability on mobile device(you can't do a lot of matrix computation in a small amount of time on a mobile CPU) and network bandwidth(send image to server might take a while).
+- iOS -> Select/Take Image -> Compress Image -> Send to server -> Receive Image -> Display -> (Optional) Feedback to server
+- Voice feedback and a very naive sentimental anaysis to convert text into rating.
+- ​Real-time object detection is **not** supported due to the limitation of the network bandwidth(sending image to server, though compressed, is still time consuming).
 
 ## Server
 
@@ -35,7 +37,7 @@ def run(self):
 
 ​	An example server file named ``ios_server_exmaple`` is provided, which is implemented in python3 with YOLOv2(search darkflow in github) to do object detection.
 
-## Others
+## Test
 
-​	This app has been tested on two real device: iPhone7 and iPhone7 plus.
+​	This app has been tested on iPhone7 plus with latest iOS version(10.3). 
 
