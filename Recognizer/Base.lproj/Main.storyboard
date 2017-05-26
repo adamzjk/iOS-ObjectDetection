@@ -133,11 +133,11 @@
                                 </subviews>
                             </stackView>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="Rqe-Hs-Ay8">
-                                <rect key="frame" x="16" y="72" width="343" height="460"/>
+                                <rect key="frame" x="16" y="72" width="343" height="430"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="343" id="DdS-CD-twD"/>
-                                    <constraint firstAttribute="height" constant="460" id="KTl-LN-Nm9"/>
+                                    <constraint firstAttribute="height" constant="430" id="KTl-LN-Nm9"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="pZc-MB-MbX" appends="YES" id="Zju-aF-Wvb"/>
@@ -153,17 +153,26 @@
                                     <action selector="voiceButtonPressed:" destination="k0Z-KQ-Gj2" eventType="touchUpInside" id="Zuq-L8-9zz"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqU-MP-AOS">
+                                <rect key="frame" x="16" y="529" width="343" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vuU-gL-bc5" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" constant="117" id="17h-1T-p8T"/>
+                            <constraint firstItem="zqU-MP-AOS" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" id="1s6-1i-09y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="59A-lh-Qmu" secondAttribute="trailing" id="5ui-oN-lyf"/>
                             <constraint firstItem="59A-lh-Qmu" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" id="6ha-qe-hvu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zqU-MP-AOS" secondAttribute="trailing" id="7pz-ZK-cpw"/>
                             <constraint firstItem="Ymc-xW-ToV" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" constant="42" id="8w6-o8-wSY"/>
                             <constraint firstItem="vuU-gL-bc5" firstAttribute="top" secondItem="Ymc-xW-ToV" secondAttribute="bottom" constant="2" id="CwS-hO-TQI"/>
                             <constraint firstItem="59A-lh-Qmu" firstAttribute="top" secondItem="vuU-gL-bc5" secondAttribute="bottom" constant="16" id="Erf-BF-xx2"/>
                             <constraint firstItem="GVh-jE-f7x" firstAttribute="top" secondItem="59A-lh-Qmu" secondAttribute="bottom" constant="8" id="EvN-gR-6rH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ymc-xW-ToV" secondAttribute="trailing" constant="42" id="Jrb-oa-KLz"/>
+                            <constraint firstItem="Ymc-xW-ToV" firstAttribute="top" secondItem="zqU-MP-AOS" secondAttribute="bottom" constant="8" id="K3h-Rh-8NA"/>
                             <constraint firstItem="Rqe-Hs-Ay8" firstAttribute="top" secondItem="sRK-Fq-MNM" secondAttribute="bottom" constant="8" id="Tzg-n4-2Lv"/>
                             <constraint firstItem="Rqe-Hs-Ay8" firstAttribute="leading" secondItem="Wq3-8b-Xg3" secondAttribute="leadingMargin" id="d7x-n1-xIl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vuU-gL-bc5" secondAttribute="trailing" constant="117" id="mE0-Jv-u9K"/>
@@ -186,6 +195,7 @@
                         <outlet property="photoImageView" destination="Rqe-Hs-Ay8" id="GcD-IQ-scV"/>
                         <outlet property="ratingControl" destination="Ymc-xW-ToV" id="9J7-YM-tCE"/>
                         <outlet property="voiceButton" destination="vuU-gL-bc5" id="VjP-Yn-JkJ"/>
+                        <outlet property="voiceTextLabel" destination="zqU-MP-AOS" id="TNp-7z-0o2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCQ-7d-C9K" userLabel="First Responder" sceneMemberID="firstResponder"/>

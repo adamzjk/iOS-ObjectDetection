@@ -57,19 +57,28 @@ import Foundation
             score -= 2
         }
         // good
-        if text.range(of: "good") != nil{
-            score += 1
-        } else if text.range(of: "not good") != nil{
+        if text.range(of: "not good") != nil{
             score -= 1
+        } else if text.range(of: "good") != nil{
+            score += 1
         }
         if text.range(of: "nice") != nil {score += 1}
         if text.range(of: "accurate") != nil {score += 1}
         if text.range(of: "impressive") != nil {score += 2}
         if text.range(of: "great") != nil {score += 2}
         
-        if text.range(of: "awful") != nil {score -= 2}
+        if text.range(of: "very") != nil {
+            if score > 3{
+                score += 1;
+            }
+            if score < 3{
+                score -= 1;
+            }
+        }
+        
         if text.range(of: "awful") != nil {score -= 2}
         if text.range(of: "acceptable") != nil {score = 3}
+        
         
         if score > 5 { score = 5 }
         if score < 0 { score = 0 }

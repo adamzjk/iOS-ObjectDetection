@@ -81,6 +81,8 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
     @IBOutlet weak var voiceButton: UIButton!
+    @IBOutlet weak var voiceTextLabel: UILabel!
+    
     
     // Speech Recognizer
     var speechRecognitionResults = String()
@@ -88,6 +90,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,6 +168,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
             if result != nil {
                 
                 self.speechRecognitionResults = (result?.bestTranscription.formattedString)!
+                self.voiceTextLabel.text = self.speechRecognitionResults;
                 isFinal = (result?.isFinal)!
             }
             
@@ -227,14 +231,15 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
             audioEngine.stop()
             recognitionRequest?.endAudio()
             self.voiceButton.isEnabled = false
-            let alert = UIAlertController(title: "Message",
-                                          message: self.speechRecognitionResults,
-                                          preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "nice!",
-                                          style: UIAlertActionStyle.default,
-                                          handler: nil))
+            voiceTextLabel.text = self.speechRecognitionResults;
             ratingControl.sentimentAnalysisAndAdjustScore(text: self.speechRecognitionResults)
-            self.present(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: "Message",
+//                                          message: self.speechRecognitionResults,
+//                                          preferredStyle: UIAlertControllerStyle.alert)
+//            alert.addAction(UIAlertAction(title: "nice!",
+//                                          style: UIAlertActionStyle.default,
+//                                          handler: nil))
+//            self.present(alert, animated: true, completion: nil)
             self.voiceButton.setTitle("Start Recording", for: .normal)
         } else {
             startRecording()
@@ -267,5 +272,12 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
         optionMenu.addAction(sharePhoto)
         optionMenu.addAction(cancelAction)
         self.present(optionMenu, animated: true, completion: nil)
+        
+        // clear feedback
+        voiceTextLabel.text = "";
+        ratingControl.rating = 0;
     }
 }
+
+
+
