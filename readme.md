@@ -2,7 +2,7 @@
 
 ​	This is a client app which means you are going to **need a server** in order to run the application. A server with a powerful GPU and high network bandwidth is recommanded. 
 
-## Demo
+## Demo   ![alt text](https://travis-ci.org/adamzjk/iOS-ObjectDetection.svg?branch=master)
 
  Video demo: https://youtu.be/dkbxNVs7S9M ; screen shot below is **not** the newest!
 
