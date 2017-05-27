@@ -11,6 +11,7 @@ import Socket
 
 var serverIpAddr: String?
 
+
 class AddViewController: UIViewController {
     //MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
