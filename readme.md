@@ -6,7 +6,7 @@
 
  Video demo: https://youtu.be/dkbxNVs7S9M 
 
-![alt text](http://wx4.sinaimg.cn/large/98d135cfly1fg13j1cs1tj21kw0xm7wh.jpg)
+![alt text](http://wx1.sinaimg.cn/large/98d135cfly1fg13lo4075j21kw0xm7wh.jpg)
 
 ## Requirements 
 
