@@ -4,9 +4,9 @@
 
 ## Demo   ![alt text](https://travis-ci.org/adamzjk/iOS-ObjectDetection.svg?branch=master)
 
- Video demo: https://youtu.be/dkbxNVs7S9M ; screen shot below is **not** the newest!
+ Video demo: https://youtu.be/dkbxNVs7S9M 
 
-![alt text](http://wx3.sinaimg.cn/large/98d135cfly1ffql9xdjaqj21kw0xrnpj.jpg)
+![alt text](http://wx4.sinaimg.cn/large/98d135cfly1fg13j1cs1tj21kw0xm7wh.jpg)
 
 ## Requirements 
 

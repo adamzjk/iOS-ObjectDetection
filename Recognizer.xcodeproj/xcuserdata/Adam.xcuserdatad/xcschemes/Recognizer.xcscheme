@@ -17,7 +17,7 @@
                BlueprintIdentifier = "66E90B111ECD5FED00D4CF06"
                BuildableName = "Recognizer.app"
                BlueprintName = "Recognizer"
-               ReferencedContainer = "container:Recognizer.xcodeproj">
+               ReferencedContainer = "container:Adam Lens.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "66E90B251ECD5FED00D4CF06"
                BuildableName = "RecognizerTests.xctest"
                BlueprintName = "RecognizerTests"
-               ReferencedContainer = "container:Recognizer.xcodeproj">
+               ReferencedContainer = "container:Adam Lens.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -87,7 +87,7 @@
             BlueprintIdentifier = "66E90B111ECD5FED00D4CF06"
             BuildableName = "Recognizer.app"
             BlueprintName = "Recognizer"
-            ReferencedContainer = "container:Recognizer.xcodeproj">
+            ReferencedContainer = "container:Adam Lens.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

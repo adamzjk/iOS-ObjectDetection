@@ -51,5 +51,7 @@
 	<string>Speech Recognition is required for feedback.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Speech Recognition is required for feedback.</string>
+	<key>CFBundleDisplayName</key>
+	<string>Adam Lens</string>
 </dict>
 </plist>
