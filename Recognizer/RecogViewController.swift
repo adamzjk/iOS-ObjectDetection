@@ -13,32 +13,22 @@ import SwiftSocket
 import Speech
 
 var selectedOriginalImage : UIImage?
+var useSOINNmodel : Int = 0 ;
+var error_message : String?
 
-func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-    let size = image.size
+func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
     
-    let widthRatio  = targetSize.width  / image.size.width
-    let heightRatio = targetSize.height / image.size.height
+    let scale = newWidth / image.size.width
+    let newHeight = image.size.height * scale
+    UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+    image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
     
-    // Figure out what our orientation is, and use that to form the rectangle
-    var newSize: CGSize
-    if(widthRatio > heightRatio) {
-        newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-    } else {
-        newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-    }
-    
-    // This is the rect that we've calculated out and this is what is actually used below
-    let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-    
-    // Actually do the resizing to the rect using the ImageContext stuff
-    UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-    image.draw(in: rect)
     let newImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     
-    return newImage!
+    return newImage
 }
+
 
 
 func connectAndSentImage(image:UIImage, ip:String!) -> UIImage?{
@@ -75,20 +65,58 @@ func connectAndSentImage(image:UIImage, ip:String!) -> UIImage?{
         newImg = UIImage(data: img_total)!
     }catch{
         print(error)
+        error_message = String(describing: error)
         return nil
     }
     return newImg
 }
 
-func sendFeedbackByUDP(score:Int!, ip:String!){
-    do {
-        let udpSocket = try Socket.create(family: .inet, type: .datagram, proto: .udp)
-        let serverAddr = Socket.createAddress(for: ip, on: 23335)
-        try udpSocket.write(from: String(score), to: serverAddr!)
+func connectAndSentSOINNimage(image:UIImage, ip:String!){
+    selectedOriginalImage = image;
+    let image = resizeImage(image: image, newWidth: 299)
+    let imageData = UIImageJPEGRepresentation(image!, 0.8)
+    do{
+        // 1, sent image
+        let tcpSocket = try Socket.create()
+        try tcpSocket.connect(to: ip, port: 23333)
+        try tcpSocket.write(from: imageData!)
+        print("sent")
     } catch {
         print(error)
     }
 }
+
+func sendFeedbackByUDP(message:String!, ip:String!){
+    do {
+        if useSOINNmodel == 0{
+            let udpSocket = try Socket.create(family: .inet, type: .datagram, proto: .udp)
+            let serverAddr = Socket.createAddress(for: ip, on: 23335)
+            try udpSocket.write(from: message, to: serverAddr!)
+            print("send feedback " + message + " to 23335")
+        } else {
+            let udpSocket = try Socket.create(family: .inet, type: .datagram, proto: .udp)
+            let serverAddr = Socket.createAddress(for: ip, on: 24678)
+            try udpSocket.write(from: message, to: serverAddr!)
+            print("send feedback " + message + " to 24678")
+        }
+    } catch {
+        print("Send feedback Failed!")
+        print(error)
+    }
+}
+
+func receiveStringByUDP(ip:String!) -> String! {
+    do {
+        let udpSocket = try Socket.create(family: .inet, type: .datagram, proto: .udp)
+        var data = Data()
+        let _ = try udpSocket.listen(forMessage: &data, on: 23337)
+        return String(bytes: data, encoding: .utf8)
+    } catch  {
+        print(error)
+    }
+    return "error, try again!"
+}
+
 
 class AlertController: UIViewController {
     
@@ -113,6 +141,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     @IBOutlet weak var ratingControl: RatingControl!
     @IBOutlet weak var voiceButton: UIButton!
     @IBOutlet weak var voiceTextLabel: UILabel!
+    @IBOutlet weak var feedbackButton: UIBarButtonItem!
     
     
     // Speech Recognizer
@@ -122,10 +151,28 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     
+    var feedbackRecorded : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         speechRecognizer?.delegate = self as? SFSpeechRecognizerDelegate
+        feedbackButton.isEnabled = false
+        // create the alert
+        let msg_str:String = "YOLO is a deep neural network for object detection while SOINN is an life-long learning model"
+        let alert = UIAlertController(title: "Which Model to Use?",
+                                      message: msg_str,
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add the actions (buttons)
+        alert.addAction(UIAlertAction(title: "Use SOINN", style: UIAlertActionStyle.default, handler: { action in
+            useSOINNmodel = 1;
+        }))
+        alert.addAction(UIAlertAction(title: "Use YOLO", style: UIAlertActionStyle.default, handler: { action in
+            useSOINNmodel = 0;
+        }))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
 
         // Do any additional setup after loading the view.
     }
@@ -143,25 +190,35 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if feedbackButton.isEnabled == true{
+            print("Didn't send feedback, send default feedback")
+            sendFeedbackByUDP(message: "none", ip: serverIpAddr)
+        }
+        
+        // clear feedback
+        voiceTextLabel.text = ""
+        feedbackButton.isEnabled = true
+        feedbackRecorded = 0
+        ratingControl.rating = 0
         
         // The info dictionary may contain multiple representations of the image. You want to use the original.
         guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
         
-        //let alert = AlertController()
-        //alert.showAlert(title: "Working on it", message: "App is communicating with server, this might take a few seconds...")
-        
         print("Connect to " + serverIpAddr!)
-        let newImg = connectAndSentImage(image: selectedImage, ip: serverIpAddr!)
-        //alert.dismissAlert()
         
-        
-        // Set photoImageView to display the selected image.
-        photoImageView.image = newImg
-        
-        // Dismiss the picker.
-        dismiss(animated: true, completion: nil)
+        if useSOINNmodel == 0 {
+            let newImg = connectAndSentImage(image: selectedImage, ip: serverIpAddr!)
+            photoImageView.image = newImg
+            dismiss(animated: true, completion: nil)
+        } else {
+            photoImageView.image = selectedImage
+            dismiss(animated: true, completion: nil)
+            connectAndSentSOINNimage(image: selectedImage, ip: serverIpAddr!)
+            let message = receiveStringByUDP(ip: serverIpAddr)
+            voiceTextLabel.text = message
+        }
     }
     
     //Speech Recognition
@@ -246,8 +303,35 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     }
     
     @IBAction func feedbackButtonPressed(_ sender: UIBarButtonItem) {
-        let score = ratingControl.rating
-        sendFeedbackByUDP(score: score, ip: serverIpAddr)
+        if useSOINNmodel == 0 {
+            let score = ratingControl.rating
+            sendFeedbackByUDP(message: String(score), ip: serverIpAddr)
+        } else {
+            if feedbackRecorded == 0 {
+                let alert = UIAlertController(title: "No Answer Found",
+                                              message: "Please give us the real name of the object and help us improve our model.",
+                                              preferredStyle: UIAlertControllerStyle.alert)
+                alert.addTextField(configurationHandler: {(textField: UITextField!) in
+                    textField.placeholder = "Enter text:"
+                    textField.isSecureTextEntry = false // for password input
+                })
+                // 3. Grab the value from the text field, and print it when the user clicks OK.
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                    let message = alert!.textFields![0].text // Force unwrapping because we know it exists.
+                    if message == nil{
+                        return
+                    }
+                    print("use input by hand [feedback]=" + message!)
+                    sendFeedbackByUDP(message: message, ip: serverIpAddr)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let words = voiceTextLabel.text!.components(separatedBy: " ")
+                let message = words[words.count-1]
+                sendFeedbackByUDP(message: message, ip: serverIpAddr)
+            }
+        }
+        
         let alert = UIAlertController(title: "Thanks",
                                       message: "Our object detection model wil be improved with the help of your feedback",
                                       preferredStyle: UIAlertControllerStyle.alert)
@@ -255,6 +339,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
                                       style: UIAlertActionStyle.default,
                                       handler: nil))
         self.present(alert, animated: true, completion: nil)
+        feedbackButton.isEnabled = false
     }
     
     @IBAction func voiceButtonPressed(_ sender: UIButton) {
@@ -263,25 +348,22 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
             recognitionRequest?.endAudio()
             self.voiceButton.isEnabled = false
             voiceTextLabel.text = self.speechRecognitionResults;
-            ratingControl.sentimentAnalysisAndAdjustScore(text: self.speechRecognitionResults)
-//            let alert = UIAlertController(title: "Message",
-//                                          message: self.speechRecognitionResults,
-//                                          preferredStyle: UIAlertControllerStyle.alert)
-//            alert.addAction(UIAlertAction(title: "nice!",
-//                                          style: UIAlertActionStyle.default,
-//                                          handler: nil))
-//            self.present(alert, animated: true, completion: nil)
+            if useSOINNmodel == 0{
+                ratingControl.sentimentAnalysisAndAdjustScore(text: self.speechRecognitionResults)
+            }
             self.voiceButton.setTitle("Start Recording", for: .normal)
         } else {
             startRecording()
             self.voiceButton.setTitle("Stop Recording", for: .normal)
         }
+        feedbackRecorded = 1
     }
     
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         
         // UIImagePickerController is a view controller that lets a user pick media from their photo library.
         let imagePickerController = UIImagePickerController()
+        voiceTextLabel.text = nil
         
         // Pickler source
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -303,10 +385,6 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate{
         optionMenu.addAction(sharePhoto)
         optionMenu.addAction(cancelAction)
         self.present(optionMenu, animated: true, completion: nil)
-        
-        // clear feedback
-        voiceTextLabel.text = "";
-        ratingControl.rating = 0;
     }
 }
 
