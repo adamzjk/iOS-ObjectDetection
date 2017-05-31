@@ -37,7 +37,7 @@ class AddViewController: UIViewController {
     @IBAction func continueAction(_ sender: UIButton) {
         serverIpAddr = ipTextField.text
         if serverIpAddr == nil || serverIpAddr == "" {
-            serverIpAddr = "0.0.0.0"
+            serverIpAddr = "192.168.31.161"
         }
         do {
             let sckt = try Socket.create()

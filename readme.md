@@ -40,5 +40,5 @@ def run(self):
 
 ## Test
 
-​	This app has been tested on iPhone7 plus with latest iOS version(10.3). 
+​	This app has been tested on iPhone7 plus with latest iOS version(10.3). For any questions feel free to ask by sending email to adamzjk@foxmail.com or submit an issue! 
 
