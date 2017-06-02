@@ -2,7 +2,7 @@
 
 ​	This is a client app which means you are going to **need a server** in order to run the application. A server with a powerful GPU and high network bandwidth is recommanded. 
 
-## Demo   ![alt text](https://travis-ci.org/adamzjk/iOS-ObjectDetection.svg?branch=master)
+## YOLOv2 Demo   ![alt text](https://travis-ci.org/adamzjk/iOS-ObjectDetection.svg?branch=master)
 
  Video demo: https://youtu.be/dkbxNVs7S9M 
 
@@ -15,7 +15,11 @@
 - iOS 10
 - Server
 
-## Features
+## SOIC
+
+​	Self-Organizing Incremental Neural Network with Convolution. Enable life-long image recognition. Details omited.
+
+## YOLOv2
 
 - iOS -> Select/Take Image -> Compress Image -> Send to server -> Receive Image -> Display -> (Optional) Feedback to server
 - Voice recognition
